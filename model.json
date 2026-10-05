@@ -1,0 +1,167 @@
+{
+  "kind": "email_client",
+  "version": "0.1.0",
+  "title": "Email Client",
+  "description": "Read mail over IMAP, prepare immutable drafts and send only after exact approval over SMTP.",
+  "repository_url": "https://github.com/HackInvent/bloxmith-email-client",
+  "bloxsmith_compatibility": [
+    "1.0.9"
+  ],
+  "tested_with_bloxsmith": "1.0.9",
+  "prerequisites": [
+    {
+      "type": "manual",
+      "name": "Linux, Python 3.10+, configured IMAP/SMTP TLS accounts. Credentials must be JSON wallet secrets. No external mail SDK required."
+    }
+  ],
+  "locales": {
+    "en": "locales/en.json",
+    "fr": "locales/fr.json"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": 1,
+        "name": "request",
+        "title": "Mail request",
+        "accepts": [
+          "application/json",
+          "text/plain",
+          "message/*"
+        ],
+        "multiplicity": "one",
+        "required": false,
+        "execution_requirement": "not_required_for_execution"
+      },
+      {
+        "id": 2,
+        "name": "decision",
+        "title": "Exact approval",
+        "accepts": [
+          "application/json",
+          "text/plain",
+          "message/*"
+        ],
+        "multiplicity": "one",
+        "required": false,
+        "execution_requirement": "not_required_for_execution"
+      }
+    ],
+    "outputs": [
+      {
+        "id": 1,
+        "name": "messages",
+        "title": "Received messages",
+        "emits": [
+          "application/json",
+          "message/*"
+        ],
+        "multiplicity": "many"
+      },
+      {
+        "id": 2,
+        "name": "draft",
+        "title": "Draft to approve",
+        "emits": [
+          "application/json",
+          "message/*"
+        ],
+        "multiplicity": "many"
+      },
+      {
+        "id": 3,
+        "name": "receipt",
+        "title": "Operation receipt",
+        "emits": [
+          "application/json",
+          "message/*"
+        ],
+        "multiplicity": "many"
+      }
+    ]
+  },
+  "config": {
+    "imap_host": "",
+    "imap_port": 993,
+    "imap_tls": "ssl",
+    "imap_secret_ref": "",
+    "smtp_host": "",
+    "smtp_port": 465,
+    "smtp_tls": "ssl",
+    "smtp_secret_ref": "",
+    "sender": "",
+    "allowed_recipients": [],
+    "mailbox": "INBOX",
+    "attachment_root": "",
+    "send_enabled": false,
+    "extract_attachments": true,
+    "ca_file": "",
+    "timeout_sec": 30,
+    "max_message_bytes": 5242880,
+    "max_body_chars": 100000,
+    "max_messages": 20,
+    "max_scan_uids": 1000,
+    "max_attachments": 10,
+    "draft_lifetime_sec": 3600,
+    "min_send_interval_sec": 2,
+    "max_records": 1000,
+    "max_storage_bytes": 134217728
+  },
+  "port_capabilities": {
+    "can_add_inputs": false,
+    "can_add_outputs": false
+  },
+  "runtime": {
+    "initial_state": "waiting",
+    "runtime_executable": true,
+    "active_worker": true,
+    "centralized_executor": "generic",
+    "centralized_dependency_mode": "any_event",
+    "file_browser": true,
+    "active_execution_policy": "on_each_event"
+  },
+  "ui_assets": {
+    "modal": [
+      {
+        "kind": "css",
+        "path": "assets/css/properties.css"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/properties.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/settings.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/block_modal.js"
+      }
+    ],
+    "inspector_panel": [
+      {
+        "kind": "css",
+        "path": "assets/css/properties.css"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/properties.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/settings.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/inspector_panel.js"
+      }
+    ],
+    "node_card": [
+      {
+        "kind": "css",
+        "path": "assets/css/node_card.css"
+      }
+    ]
+  }
+}

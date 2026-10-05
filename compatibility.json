@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "email_client",
+  "block_version": "0.1.0",
+  "maintained_by": "HackInvent",
+  "source": {
+    "algorithm": "block-source-v1",
+    "sha256": "c6f422d3b8aa7cf7d235dc683c5bff4829a835765a0699157cce29e2528572be"
+  },
+  "bloxsmith_compatibility": [
+    "1.0.9"
+  ],
+  "tested_with_bloxsmith": "1.0.9",
+  "validations": [
+    {
+      "bloxsmith_version": "1.0.9",
+      "framework_commit": "f1a87f6369d2acfb8be41d23ea849384cd461c86",
+      "framework_source_sha256": "66e36a13fd9a23a0a0576ec81552d6e479671db6db9b8692cc7486c5aac4f3b8",
+      "tested_at": "2026-10-04T21:02:13.212427+00:00",
+      "status": "passed",
+      "installation_mode": "bundled",
+      "suite_paths": [
+        "tests/F5.01_email_client.py",
+        "tests/F5.02_email_client_runtime.py",
+        "tests/F8.01_email_client_ui.py"
+      ],
+      "suite_count": 3,
+      "report_sha256": "d93a8b6d984c86b533a9e7498fcd0ad5f04bb8fdef686a2551527c8d76eecfaf"
+    }
+  ]
+}

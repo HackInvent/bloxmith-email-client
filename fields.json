@@ -1,0 +1,210 @@
+[
+  {
+    "key": "sender",
+    "group": "main",
+    "type": "text",
+    "label": "Sender address",
+    "help": "Bare email address used in the approved From header."
+  },
+  {
+    "key": "allowed_recipients",
+    "group": "main",
+    "type": "json",
+    "label": "Allowed recipients",
+    "help": "JSON array of exact email addresses, e.g. [\"recipient@example.org\"]. No wildcard.",
+    "rows": 4
+  },
+  {
+    "key": "send_enabled",
+    "group": "main",
+    "type": "boolean",
+    "label": "Enable approved sending",
+    "help": "Off by default. Every send still requires an exact draft/revision approval on decision."
+  },
+  {
+    "key": "imap_host",
+    "group": "incoming",
+    "type": "text",
+    "label": "IMAP server",
+    "help": "DNS name or IPv4 address, without a URL scheme or port."
+  },
+  {
+    "key": "imap_port",
+    "group": "incoming",
+    "type": "integer",
+    "label": "IMAP port",
+    "help": "Usually 993 for TLS, 143 for STARTTLS.",
+    "min": 1,
+    "max": 65535
+  },
+  {
+    "key": "imap_tls",
+    "group": "incoming",
+    "type": "select",
+    "label": "IMAP encryption",
+    "help": "TLS is mandatory and the certificate is verified.",
+    "options": [
+      "ssl",
+      "starttls"
+    ]
+  },
+  {
+    "key": "imap_secret_ref",
+    "group": "incoming",
+    "type": "text",
+    "label": "IMAP wallet reference",
+    "help": "secret://workspace/mail_account. The secret is JSON with username and password; never paste credentials here."
+  },
+  {
+    "key": "mailbox",
+    "group": "incoming",
+    "type": "text",
+    "label": "Mailbox",
+    "help": "ASCII mailbox name. Read-only access; messages are not marked as read."
+  },
+  {
+    "key": "smtp_host",
+    "group": "outgoing",
+    "type": "text",
+    "label": "SMTP server",
+    "help": "DNS name or IPv4 address. Required before preparing a draft."
+  },
+  {
+    "key": "smtp_port",
+    "group": "outgoing",
+    "type": "integer",
+    "label": "SMTP port",
+    "help": "Usually 465 for TLS, 587 for STARTTLS.",
+    "min": 1,
+    "max": 65535
+  },
+  {
+    "key": "smtp_tls",
+    "group": "outgoing",
+    "type": "select",
+    "label": "SMTP encryption",
+    "help": "Verified TLS only. All recipients must be accepted before sending content.",
+    "options": [
+      "ssl",
+      "starttls"
+    ]
+  },
+  {
+    "key": "smtp_secret_ref",
+    "group": "outgoing",
+    "type": "text",
+    "label": "SMTP wallet reference",
+    "help": "JSON wallet secret with username and password. It may be the same reference as IMAP."
+  },
+  {
+    "key": "attachment_root",
+    "group": "files",
+    "type": "directory",
+    "label": "Outgoing attachment directory",
+    "help": "Only regular files inside this directory can be attached. Snapshots are copied into the block’s private storage."
+  },
+  {
+    "key": "extract_attachments",
+    "group": "files",
+    "type": "boolean",
+    "label": "Extract received attachments",
+    "help": "Save bounded copies under generated filenames in private block storage; never execute them."
+  },
+  {
+    "key": "ca_file",
+    "group": "files",
+    "type": "text",
+    "label": "Custom CA file (optional)",
+    "help": "PEM certificate authority file. Empty uses system trust; this never disables certificate verification."
+  },
+  {
+    "key": "timeout_sec",
+    "group": "limits",
+    "type": "integer",
+    "label": "Network deadline (seconds)",
+    "help": "Hard deadline per exchange. Stop terminates the block-owned network process.",
+    "min": 1,
+    "max": 300
+  },
+  {
+    "key": "max_message_bytes",
+    "group": "limits",
+    "type": "integer",
+    "label": "Maximum MIME size (bytes)",
+    "help": "Applies to one complete received or prepared message. Default 5 MiB.",
+    "min": 1024,
+    "max": 10485760
+  },
+  {
+    "key": "max_body_chars",
+    "group": "limits",
+    "type": "integer",
+    "label": "Maximum body length",
+    "help": "Drafts exceeding this length are refused; received text is truncated with an explicit flag.",
+    "min": 100,
+    "max": 200000
+  },
+  {
+    "key": "max_messages",
+    "group": "limits",
+    "type": "integer",
+    "label": "Messages per search",
+    "help": "Maximum number of message summaries returned by one command.",
+    "min": 1,
+    "max": 50
+  },
+  {
+    "key": "max_scan_uids",
+    "group": "limits",
+    "type": "integer",
+    "label": "UID search window",
+    "help": "Default search covers the newest UID window. Use explicit cursors to scan older mail.",
+    "min": 1,
+    "max": 5000
+  },
+  {
+    "key": "max_attachments",
+    "group": "limits",
+    "type": "integer",
+    "label": "Attachments per message",
+    "help": "Limit both received extraction and outgoing drafts.",
+    "min": 0,
+    "max": 20
+  },
+  {
+    "key": "draft_lifetime_sec",
+    "group": "limits",
+    "type": "integer",
+    "label": "Draft lifetime (seconds)",
+    "help": "Expired drafts cannot be sent. Prepare a new request instead.",
+    "min": 30,
+    "max": 86400
+  },
+  {
+    "key": "min_send_interval_sec",
+    "group": "limits",
+    "type": "integer",
+    "label": "Minimum send interval (seconds)",
+    "help": "Commands received too early are refused, not queued or automatically retried.",
+    "min": 1,
+    "max": 3600
+  },
+  {
+    "key": "max_records",
+    "group": "limits",
+    "type": "integer",
+    "label": "Maximum journal records",
+    "help": "Preserve deduplication history. At the limit, new requests are refused; nothing is purged.",
+    "min": 1,
+    "max": 10000
+  },
+  {
+    "key": "max_storage_bytes",
+    "group": "limits",
+    "type": "integer",
+    "label": "Private storage limit (bytes)",
+    "help": "Includes drafts, received attachments and the journal. Default 128 MiB; no automatic cleanup.",
+    "min": 1048576,
+    "max": 1073741824
+  }
+]

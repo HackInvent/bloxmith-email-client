@@ -1,0 +1,1 @@
+"""Autonomous Email Client package."""
